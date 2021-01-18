@@ -17,7 +17,6 @@
     $ git clone https://github.com/viktor0018/bulletin-board.test
     $ cd bulletin-board.test
     $ composer install
-    $ npm install
 
 Run the sail:
 
@@ -31,7 +30,16 @@ Seeding the database :
 
     $ sail artisan db:seed
 
+Frontend:
+
+    $ git clone https://github.com/viktor0018/bulletin-board.frontend
+    $ cd bulletin-board.frontend
+    $ npm install
+    $ npm run serve
+
 Now you can access the application via http://0.0.0.0:80
+
+Frontend via http://localhost:8083/
 
 And application database via adminer - http://0.0.0.0:8081/?pgsql=postgres&username=root&db=bulletin_board.test&ns=public&table=users
 
