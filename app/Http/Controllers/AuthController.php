@@ -50,7 +50,13 @@ class AuthController extends Controller
             'user_status_id' => 1
         ]));
         event(new Registered($user));
-        return $user->createToken('token-name', ['server:update'])->plainTextToken;
+        return [
+            'access_token' =>$user->createToken('token-name', ['server:update'])->plainTextToken,
+            'user' => $user] ;
+    }
+
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
     }
 
 }
