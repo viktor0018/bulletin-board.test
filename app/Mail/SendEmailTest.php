@@ -11,6 +11,8 @@ class SendEmailTest extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name;
+
     /**
      * Create a new message instance.
      *
@@ -18,7 +20,7 @@ class SendEmailTest extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->name = 123;
     }
 
     /**
@@ -28,6 +30,11 @@ class SendEmailTest extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.test');
+            return $this->view('emails.test')
+                    ->subject('this is test email subject')  //<= how to pass variable on this subject
+                    ->with([
+                        'title'     => 'tit', //this works without queue
+                        'content'     => 'con', //this works without queue
+                    ]);
     }
 }

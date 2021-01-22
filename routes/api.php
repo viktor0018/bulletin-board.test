@@ -15,10 +15,16 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::post('/login',[AuthController::class, 'login']);
-Route::post('/register',[AuthController::class, 'register']);
-Route::post('/logout',[AuthController::class, 'logout']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+Route::post('/forgot-password', [AuthController::class, 'forgot_password']);
+Route::post('/reset-password', [AuthController::class, 'reset_password']);
+//Route::middleware('auth:sanctum')->post('/verify-email', [AuthController::class, 'verify_email']);
+Route::middleware('auth:sanctum')->get('/verify-email/{id}/{hash}', [AuthController::class, 'verify_email'])->name('verification.verify');;

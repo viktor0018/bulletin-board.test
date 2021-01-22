@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\VerifyEmail;
 
 class User extends Authenticatable
 {
@@ -57,5 +58,15 @@ class User extends Authenticatable
     public function moderation()
     {
         return $this->belongsTo(Moderation::class, 'id', 'city_id');
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail); // my notification
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Mail\SendEmailTest;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class SendEmailJob implements ShouldQueue
 {
@@ -33,7 +33,6 @@ class SendEmailJob implements ShouldQueue
     */
     public function handle()
     {
-        $email = new SendEmailTest();
-        Mail::to($this->details['email'])->send($email);
+        Mail::to($this->details['email'])->send(new SendEmailTest($this->details['link']));
     }
 }

@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmailTest;
 
 Route::get('email-test', function(){
-
-	$details['email'] = 'v.kalyaev@gmail.com';
-
-    dispatch(new App\Jobs\SendEmailJob($details));
-
+    $mail = Mail::to('v.kalyaev@gmail.com')->send(new SendEmailTest());
     dd('done');
 });
+
