@@ -1,3 +1,0 @@
-dfgdfdfg
-{{$title}}
-xsxsssss

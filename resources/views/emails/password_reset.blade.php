@@ -1,4 +1,1 @@
-Password reset:
-
-<a href="{{$link}}"> password reset link</a>.
-
+password reset {{$url}}
