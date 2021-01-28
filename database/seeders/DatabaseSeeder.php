@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
          DB::unprepared(file_get_contents(__DIR__ .'/sql/advert_status.sql'));
 
          DB::unprepared(file_get_contents(__DIR__ .'/sql/moderation_resolution.sql'));
-         \App\Models\Advert::factory(10)->create();
+         \App\Models\Advert::factory(100)->create();
 
         for($i =1 ; $i< Advert::count(); $i++ ){
             for($j =0;$j<rand(1,10);$j++){

@@ -21,6 +21,11 @@ class Advert extends Model
         'description',
         'views',
         'price',
+        'category_id',
+        'advert_status_id',
+        'city_id',
+        'published_at'
+
     ];
 
     public function author()
@@ -40,12 +45,12 @@ class Advert extends Model
 
     public function moderation()
     {
-        return $this->belongsTo(Moderation::class, 'id', 'city_id');
+        return $this->belongsTo(Moderation::class, 'id', '_id');
     }
 
     public function photo()
     {
-        return $this->belongsTo(Photo::class, 'id', 'city_id');
+        return $this->belongsTo(Photo::class, 'id', 'advert_id');
     }
 
     public function status()

@@ -26,7 +26,7 @@ class AdvertFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(128),
+            'title' => $this->faker->realText(24),
             'category_id' => Category::all()->random()->id,
             'user_id' =>  User::all()->random()->id, //User::where('status','active')->inRandomOrder()->first()->id,
             'advert_status_id' => AdvertStatus::all()->random()->id,
@@ -34,7 +34,7 @@ class AdvertFactory extends Factory
             'description' =>$this->faker->realText(128),
             'published_at'  =>$this->faker->dateTimeBetween('-1 years'),
             'views' => $this->faker->numberBetween(0,10000),
-            'price' => $this->faker->numberBetween(0,10000),
+            'price' => $this->faker->numberBetween(0,100) * 100,
         ];
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdvertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,14 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logo
 Route::post('/forgot-password', [AuthController::class, 'forgot_password']);
 Route::post('/reset-password', [AuthController::class, 'reset_password']);
 //Route::middleware('auth:sanctum')->post('/verify-email', [AuthController::class, 'verify_email']);
-Route::middleware('auth:sanctum')->get('/verify-email/{id}/{hash}', [AuthController::class, 'verify_email'])->name('verification.verify');;
+Route::middleware('auth:sanctum')->get('/verify-email/{id}/{hash}', [AuthController::class, 'verify_email'])->name('verification.verify');
+
+
+
+Route::get('/adverts', [AdvertController::class, 'index']);
+Route::get('/advert/show', [AdvertController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/advert/store', [AdvertController::class, 'store']);
+Route::post('/advert/update', [AdvertController::class, 'update']);
+Route::post('/advert/destroy', [AdvertController::class, 'destroy']);
+Route::get('/advert/list', [AdvertController::class, 'list']);
+Route::get('/myadverts', [AdvertController::class, 'myadverts']);

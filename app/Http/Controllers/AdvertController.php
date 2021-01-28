@@ -1,0 +1,165 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Advert;
+use App\Models\Category;
+use App\Models\City;
+use App\Models\Region;
+use Illuminate\Http\Request;
+
+class AdvertController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $category_id = $request->input('category_id');
+        $city_id = $request->input('city_id');
+        $price_from = $request->input('price_from');
+        $price_to = $request->input('price_to');
+        $search_text = $request->input('search_text');
+
+        $adverts = Advert
+            ::where(function($query) use ($category_id)  {
+                if($category_id > 0) {
+                    $query->where('category_id', $category_id);
+                }
+            })
+            ->where(function($query) use ($city_id)  {
+                if($city_id > 0) {
+                    $query->where('city_id', $city_id);
+                }
+            })
+            ->where(function($query) use ($price_from)  {
+                if($price_from > 0) {
+                    $query->where('price', '>' ,$price_from);
+                }
+            })
+            ->where(function($query) use ($price_to)  {
+                if($price_to > 0) {
+                    $query->where('price', '<' ,$price_to);
+                }
+            })
+            ->where(function($query) use ($search_text)  {
+                if($search_text != '') {
+                    $query->where('title', 'like' , '%'.$search_text.'%')
+                    ->orWhere('description', 'like' , '%'.$search_text.'%');
+                }
+            })
+            ->with('author')
+            ->with('category')
+            ->with('city')
+            ->with('photo')
+            ->with('status')
+            ->orderBy("id", "desc")
+            ->paginate(16);
+
+        return $this->respond($adverts);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        $advert = Advert::create(
+            $request->all() +
+            ['user_id' => $request->user()->id,
+            'advert_status_id' => 1,
+            'published_at' =>now()
+            ]
+        );
+
+        return $this->respond($advert);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        $advert =  Advert::with('category')
+        ->with('city')
+        ->with('photo')
+        ->with('author')
+        ->with('status')->findOrFail($request->input('id'));
+
+        return $this->respond($advert);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        $advert = Advert::findOrFail($request->input('id'));
+
+        /*
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required'
+        ]);*/
+
+        $advert->fill($request->all())->save();
+
+        return $this->respond($advert);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $advert = Advert::findOrFail($request->input('id'));
+
+        $advert->delete();
+
+        return $this->respond($advert);
+    }
+
+
+    public function list()
+    {
+        $resp = [
+            'categories' => Category::all(),
+            'cities' => City::all(),
+            'regions' => Region::all()
+        ];
+        return $this->respond($resp);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function myadverts()
+    {
+        $adverts = Advert::with('author')
+            ->with('category')
+            ->with('city')
+            ->with('photo')
+            ->with('status')
+            ->orderBy("id", "desc")->get();
+
+        return $this->respond($adverts);
+    }
+}

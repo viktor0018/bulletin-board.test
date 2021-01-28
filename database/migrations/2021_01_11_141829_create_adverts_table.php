@@ -30,7 +30,7 @@ class CreateAdvertsTable extends Migration
             $table->index('city_id');
             $table->mediumText('description',512);
             $table->timestamp('published_at');
-            $table->integer('views')->unsigned();
+            $table->integer('views')->unsigned()->default(0);
             $table->integer('price')->unsigned();
             $table->timestamps();
             $table->softDeletes();
