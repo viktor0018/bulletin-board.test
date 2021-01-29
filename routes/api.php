@@ -35,7 +35,7 @@ Route::middleware('auth:sanctum')->get('/verify-email/{id}/{hash}', [AuthControl
 Route::get('/adverts', [AdvertController::class, 'index']);
 Route::get('/advert/show', [AdvertController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/advert/store', [AdvertController::class, 'store']);
-Route::post('/advert/update', [AdvertController::class, 'update']);
-Route::post('/advert/destroy', [AdvertController::class, 'destroy']);
+Route::middleware('auth:sanctum')->post('/advert/update', [AdvertController::class, 'update']);
+Route::middleware('auth:sanctum')->post('/advert/destroy', [AdvertController::class, 'destroy']);
 Route::get('/advert/list', [AdvertController::class, 'list']);
-Route::get('/myadverts', [AdvertController::class, 'myadverts']);
+Route::middleware('auth:sanctum')->get('/myadverts', [AdvertController::class, 'myadverts']);

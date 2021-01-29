@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Region;
 use Illuminate\Http\Request;
+use App\ApiCode;
+use Illuminate\Support\Facades\Validator;
 
 class AdvertController extends Controller
 {
@@ -17,6 +19,21 @@ class AdvertController extends Controller
      */
     public function index(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+        [
+            'category_id' =>"required|exists_or_null:categories,id",
+            'city_id' => "required|exists_or_null:cities,id",
+            'price_from' => 'required|nullable|integer|lte:price_to|min:0',
+            'price_to' => 'required|nullable|integer|gte:price_from|min:0',
+            'search_text' => 'string|min:3|max:36|nullable',
+        ]);
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
         $category_id = $request->input('category_id');
         $city_id = $request->input('city_id');
         $price_from = $request->input('price_from');
@@ -69,6 +86,19 @@ class AdvertController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'title' =>"required|string|min:3|max:128",
+            'description' =>"required|string|min:3|max:512",
+            'city_id' =>"required|exists_or_null:cities,id",
+            'category_id' =>"required|exists_or_null:categories,id",
+        ]);
+
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
 
         $advert = Advert::create(
             $request->all() +
@@ -89,6 +119,17 @@ class AdvertController extends Controller
      */
     public function show(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'id' =>"required|exists:adverts,id",
+        ]);
+
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
         $advert =  Advert::with('category')
         ->with('city')
         ->with('photo')
@@ -106,13 +147,26 @@ class AdvertController extends Controller
      */
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'id' =>"required|exists:adverts,id",
+            'title' =>"required|string|min:3|max:128",
+            'description' =>"required|string|min:3|max:512",
+            'city_id' =>"required|exists_or_null:cities,id",
+            'category_id' =>"required|exists_or_null:categories,id",
+        ]);
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
         $advert = Advert::findOrFail($request->input('id'));
 
-        /*
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required'
-        ]);*/
+
+        if( $advert->user_id != $request->user()->id){
+            return $this->respondError([],ApiCode::ACCESS_DENIDED,"Access denied");
+        }
 
         $advert->fill($request->all())->save();
 
@@ -127,14 +181,33 @@ class AdvertController extends Controller
      */
     public function destroy(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'id' =>"required|exists:adverts,id",
+        ]);
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
         $advert = Advert::findOrFail($request->input('id'));
+
+
+        if( $advert->user_id != $request->user()->id){
+            return $this->respondError([],ApiCode::ACCESS_DENIDED,"Access denied");
+        }
 
         $advert->delete();
 
         return $this->respond($advert);
     }
 
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function list()
     {
         $resp = [
@@ -151,9 +224,10 @@ class AdvertController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myadverts()
+    public function myadverts(Request $request)
     {
-        $adverts = Advert::with('author')
+        $adverts = Advert::where('user_id',$request->user()->id)
+            ->with('author')
             ->with('category')
             ->with('city')
             ->with('photo')
