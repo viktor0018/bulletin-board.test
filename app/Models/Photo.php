@@ -16,6 +16,7 @@ class Photo extends Model
      */
     protected $fillable = [
         'is_main',
+        'advert_id',
         'link',
     ];
 

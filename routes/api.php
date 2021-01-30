@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdvertController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,10 @@ Route::middleware('auth:sanctum')->post('/advert/update', [AdvertController::cla
 Route::middleware('auth:sanctum')->post('/advert/destroy', [AdvertController::class, 'destroy']);
 Route::get('/advert/list', [AdvertController::class, 'list']);
 Route::middleware('auth:sanctum')->get('/myadverts', [AdvertController::class, 'myadverts']);
+
+
+Route::post('/photo/store', [PhotoController::class, 'store']);
+Route::get('/photos', [PhotoController::class, 'index']);
+
+Route::middleware('auth:sanctum')->post('/photo/delete', [PhotoController::class, 'destroy']);
+Route::middleware('auth:sanctum')->post('/photo/update', [PhotoController::class, 'update']);
