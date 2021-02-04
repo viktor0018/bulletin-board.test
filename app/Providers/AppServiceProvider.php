@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         if (true || env("SQL_DEBUG_LOG"))
         {
             DB::listen(function ($query) {
-                Log::debug("DB: " . $query->sql . "[".  implode(",",$query->bindings). "]");
+                //Log::debug("DB: " . $query->sql . "[".  implode(",",$query->bindings). "]");
             });
         }
 

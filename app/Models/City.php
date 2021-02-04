@@ -17,11 +17,12 @@ class City extends Model
     protected $fillable = [
         'name',
         'slug',
+        'region_id',
     ];
 
     public function region()
     {
-        return $this->hasOne(Category::class, 'id', 'region_id');
+        return $this->hasOne(Region::class, 'id', 'region_id');
     }
 
     public function advert()

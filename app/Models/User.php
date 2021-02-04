@@ -57,7 +57,17 @@ class User extends Authenticatable
 
     public function moderation()
     {
-        return $this->belongsTo(Moderation::class, 'id', 'city_id');
+        return $this->belongsTo(Moderation::class, 'id', 'user_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(UserStatus::class, 'id', 'user_status_id');
+    }
+
+    public function role()
+    {
+        return $this->hasOne(UserRole::class, 'id', 'user_role_id');
     }
 
     /**

@@ -18,6 +18,8 @@ class Moderation extends Model
         'moderated_at',
         'resolution',
         'reason',
+        'advert_id',
+        'user_id'
     ];
 
 

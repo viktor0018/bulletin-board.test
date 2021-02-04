@@ -67,6 +67,7 @@ class AdvertController extends Controller
                     ->orWhere('description', 'like' , '%'.$search_text.'%');
                 }
             })
+            ->where('advert_status_id', '=', 5)
             ->with('author')
             ->with('category')
             ->with('city')
@@ -78,13 +79,14 @@ class AdvertController extends Controller
         return $this->respond($adverts);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function reject(Request $request)
     {
         $validator = Validator::make($request->all(),
         [
@@ -134,7 +136,9 @@ class AdvertController extends Controller
         ->with('city')
         ->with('photo')
         ->with('author')
+        ->with('moderation')
         ->with('status')->findOrFail($request->input('id'));
+
 
         return $this->respond($advert);
     }
@@ -169,6 +173,37 @@ class AdvertController extends Controller
         }
 
         $advert->fill($request->all())->save();
+
+        return $this->respond($advert);
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function moderate(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+        [
+            'id' =>"required|exists:adverts,id",
+        ]);
+
+        if ($validator->fails()) {
+                return $this->respondError($validator->errors(),
+                ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
+        $advert = Advert::findOrFail($request->input('id'));
+
+
+        if( $advert->user_id != $request->user()->id){
+            return $this->respondError([],ApiCode::ACCESS_DENIDED,"Access denied");
+        }
+
+        $advert->advert_status_id = 2;
+        $advert->save();
 
         return $this->respond($advert);
     }

@@ -14,7 +14,7 @@ class PhotoController extends Controller
     {
         $validator = Validator::make($request->all(),
         [
-            'advert_id'=>'required'
+            'advert_id'=>"required|exists:adverts,id",
         ]);
 
         if ($validator->fails()) {
@@ -31,13 +31,26 @@ class PhotoController extends Controller
     {
         $validator = Validator::make($request->all(),
         [
-            'picture' => 'required',
-            'advert_id'=>'required'
+            'picture' => 'required|mimes:jpeg,bmp,png|max:5120',
+            'advert_id'=>"required|exists:adverts,id",
         ]);
 
         if ($validator->fails()) {
                 return $this->respondError($validator->errors(),
                 ApiCode::VALIDATION_ERROR,"Validation error");
+        }
+
+        $extension = $request->file('picture')->extension();
+        if (!in_array($extension, ['jpg','jpeg','png']) ) {
+            return $this->respondError($validator->errors(),
+            ApiCode::VALIDATION_ERROR,"Only image file allowed");
+        }
+
+        $count = Photo::where('advert_id',$request->input('advert_id'))->count();
+
+        if($count > 10){
+            return $this->respondError($validator->errors(),
+            ApiCode::VALIDATION_ERROR,"Image count must be less than 10");
         }
 
         $prev_photo = Photo::where('advert_id',$request->input('advert_id'))

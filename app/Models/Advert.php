@@ -45,12 +45,12 @@ class Advert extends Model
 
     public function moderation()
     {
-        return $this->belongsTo(Moderation::class, 'id', '_id');
+        return $this->hasMany(Moderation::class, 'advert_id', 'id');
     }
 
     public function photo()
     {
-        return $this->belongsTo(Photo::class, 'id', 'advert_id');
+        return $this->hasMany(Photo::class, 'advert_id', 'id');
     }
 
     public function status()
