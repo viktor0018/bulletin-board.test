@@ -30,6 +30,10 @@ Seeding the database :
 
     $ sail artisan db:seed
 
+Run elastic search reindex:
+
+    $ sail artisan search:reindex
+
 Frontend:
 
     $ git clone https://github.com/viktor0018/bulletin-board.frontend
@@ -54,5 +58,3 @@ Usefull commands:
 <p align="center">
   <img src="https://sun9-6.userapi.com/impg/rz2ITBp09RkKVVxoYziqTBMGA6zYGUKUQizMcg/PfBMeFa552M.jpg?size=2560x1499&quality=96&proxy=1&sign=9fbc7deb9e83d24a31a2c427a8301d70&type=album" width="500" title="hover text">
 </p>
-
-### ToDo

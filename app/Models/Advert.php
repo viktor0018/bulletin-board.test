@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Search\Searchable;
 
 class Advert extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -56,5 +57,10 @@ class Advert extends Model
     public function status()
     {
         return $this->hasOne(AdvertStatus::class, 'id', 'advert_status_id');
+    }
+
+
+    public function isActive(){
+        return $this->advert_status_id == 5;
     }
 }
