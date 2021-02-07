@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Advert;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Storage;
 
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
          DB::unprepared(file_get_contents(__DIR__ .'/sql/user_status.sql'));
          DB::unprepared(file_get_contents(__DIR__ .'/sql/user_roles.sql'));
          \App\Models\User::factory(10)->create();
@@ -30,17 +32,38 @@ class DatabaseSeeder extends Seeder
 
          \App\Models\Advert::factory(100)->create();
 
+
+        for($id = 0 ; $id < 20; $id++){
+            try {
+                $url = "https://picsum.photos/id/".$id."/200/300";
+                $contents = file_get_contents($url);
+            } catch (Exception $e) {
+                $id++;
+                $url = "https://picsum.photos/id/".$id."/200/300";
+                $contents = file_get_contents($url);
+            }
+            $name = 'images/'.$id.'.jpg';
+            Storage::put($name, $contents);
+        }
+
+
         for($i =1 ; $i< Advert::count(); $i++ ){
             for($j =0;$j<rand(1,10);$j++){
+
+                $id = rand(1,20);
+
+                $name = 'images/'.$id.'.jpg';
+
                 DB::table('photos')->insert([
                     'advert_id' => $i,
                     'is_main' => $j==0?1:0,
-                    'link'=> Str::random(10).'.png',
+                    'link'=> $name,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
             }
         }
+
 
         $faker = \Faker\Factory::create('ru_RU');
         for($i =1 ; $i< Advert::count(); $i++ ){
