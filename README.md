@@ -34,6 +34,10 @@ Run elastic search reindex:
 
     $ sail artisan search:reindex
 
+Run rabbitmq queue
+
+    $ sail artisan queue:work
+
 Frontend:
 
     $ git clone https://github.com/viktor0018/bulletin-board.frontend
@@ -47,9 +51,14 @@ Frontend via http://localhost:8083/
 
 And application database via adminer - http://0.0.0.0:8081/?pgsql=postgres&username=root&db=bulletin_board.test&ns=public&table=users
 
+RabbitMQ
+
+http://localhost:15672/
+
 Usefull commands:
 
     alias sail='bash vendor/bin/sail'
+    sail artisan optimize:clear
 
 ### DataBase
 

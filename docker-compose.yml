@@ -3,7 +3,7 @@ version: "3"
 services:
   laravel.test:
     build:
-      context: ./vendor/laravel/sail/runtimes/8.0
+      context: ./vendor/laravel/sail/runtimes/7.4
       dockerfile: Dockerfile
       args:
         WWWGROUP: "${WWWGROUP}"
@@ -86,6 +86,15 @@ services:
       - sail
     environment:
       - discovery.type=single-node
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    hostname: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - sail
 
   #docker run -d --name elasticsearch --net somenetwork -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:tag
 
