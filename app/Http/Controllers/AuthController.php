@@ -17,6 +17,7 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Jobs\SendPasswordResetJob;
 use App\Jobs\SendEmailVerificationNotificationJob;
+use GuzzleHttp\Client;
 
 class AuthController extends Controller
 {
@@ -50,7 +51,26 @@ class AuthController extends Controller
         ], "User have been successfully logged in");
     }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
+
+      $response = (new Client)
+         ->post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            [
+               'form_params' => [
+                  'secret' => env('APP_RECAPTCHA', ''),
+                  'response' => $request->recaptcha_token
+               ]
+            ]
+         );
+
+        $captcha =  $response->getBody();
+        $captcha = json_decode($captcha, true);
+        if ($captcha["success"] != 1) {
+            return $this->respondError([],
+                ApiCode::RECAPTCHA_ERROR,"reCaptcha error");
+        }
 
         $validator = Validator::make($request->all(),
         [
