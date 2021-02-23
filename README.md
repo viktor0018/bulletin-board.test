@@ -6,11 +6,11 @@ This is a training project - a bulletin board where you can sell goods and servi
   <img src="https://sun9-23.userapi.com/impg/KBFdt_R-IuTzcTwkf4NaIqo5Iuxy26NEtwHYvw/VVZK1Z0nPZ4.jpg?size=1858x1474&quality=96&proxy=1&sign=1d2745c4c3a0ad5ff0207a67d43ae652&type=album" width="500" title="hover text">
 </p>
 
-#Table of content:
+##### Table of Contents
 
 -   [Requirements](#Requirements)
 -   [Installation](#Installation)
--   [DataBase structure](#DataBase structure)
+-   [DataBase structure](#database)
 -   [Main page](#Main page)
 -   [Login page ](#Login page )
 -   [Register page ](#Register page )
@@ -73,6 +73,7 @@ Usefull commands:
     alias sail='bash vendor/bin/sail'
     sail artisan optimize:clear
 
+<a name="database"/>
 # DataBase structure
 
     https://app.dbdesigner.id/?action=open&uuid=064808d3-c135-4ee3-9957-acfa12900353
