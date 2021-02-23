@@ -161,7 +161,7 @@ Here you can see your bulletin. All photos are accesible via carousel plugin.
 # Seeder
 
 <p align="center">
-  <img src="https://sun9-43.userapi.com/impg/rmvEIxQmsS1T_weRzRjwU8bKnO4jTh_y2YngBA/JBAvqr_GbAA.jpg?size=1652x1032&quality=96&proxy=1&sign=298a318d53a4b0e4e0dc732f16fea31f&type=album" width="500" title="hover text">
+  <img src="https://sun9-4.userapi.com/impg/XJ5B55DOLpnHqr8gyh_jtRQMGqvFe-Q_6_wMEQ/xnt1Mwh2rJE.jpg?size=1708x1046&quality=96&proxy=1&sign=32ead7ccf066c47670c7ee3549085ab3&type=album" width="500" title="hover text">
 </p>
 
 On each database seeding we are downloading 20 images from https://picsum.photos. Then we add random count of random images for each bulletin.
