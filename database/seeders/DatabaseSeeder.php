@@ -46,12 +46,9 @@ class DatabaseSeeder extends Seeder
             Storage::put($name, $contents);
         }
 
-
         for($i =1 ; $i< Advert::count(); $i++ ){
             for($j =0;$j<rand(1,10);$j++){
-
                 $id = rand(1,20);
-
                 $name = 'images/'.$id.'.jpg';
 
                 DB::table('photos')->insert([

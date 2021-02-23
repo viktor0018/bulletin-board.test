@@ -17,6 +17,7 @@ This is a training project - a bulletin board where you can sell goods and servi
 -   [Bulletin list ](#list)
 -   [Bulletin create and edit ](#edit)
 -   [Bulletin show page ](#show)
+-   [Seeder ](#seeder)
 
 ## Requirements
 
@@ -131,7 +132,7 @@ Email and phone fields are unique for all users. After registration you will rec
 After login you get access fou your bulletin list.
 Here you can add new one, see, send to moderate, edit and delete it.
 
-<a name="edti"/>
+<a name="edit"/>
 
 ## Bulletin create and edit
 
@@ -154,3 +155,13 @@ Here you can edit your bulletin. You can uplod up to 10 photos. Also you can sel
 </p>
 
 Here you can see your bulletin. All photos are accesible via carousel plugin.
+
+<a name="seeder"/>
+
+# Seeder
+
+<p align="center">
+  <img src="https://sun9-24.userapi.com/impg/6DspQfCsMgPBz7ZEsGDhU2N38VUSLBvihdJ1qA/bRsgZ457eZo.jpg?size=1462x832&quality=96&proxy=1&sign=46f8a40e19c43745a1972ba0aa2ffa9a&type=album" width="500" title="hover text">
+</p>
+
+On each database seeding we are downloading 20 images from https://picsum.photos. Then we add random count of random images for each bulletin.
