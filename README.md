@@ -18,13 +18,13 @@ This is a training project - a bulletin board where you can sell goods and servi
 -   [Bulletin create and edit ](#edit)
 -   [Bulletin show page ](#show)
 
-# Requirements
+## Requirements
 
     Docker version 19.03.12
     Composer version 2.0.8
     NPM version  6.14.5
 
-# Installation
+## Installation
 
     $ git clone https://github.com/viktor0018/bulletin-board.test
     $ cd bulletin-board.test
