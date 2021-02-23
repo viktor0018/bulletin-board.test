@@ -90,7 +90,7 @@ Usefull commands:
   <img src="https://sun9-23.userapi.com/impg/KBFdt_R-IuTzcTwkf4NaIqo5Iuxy26NEtwHYvw/VVZK1Z0nPZ4.jpg?size=1858x1474&quality=96&proxy=1&sign=1d2745c4c3a0ad5ff0207a67d43ae652&type=album" width="500" title="hover text">
 </p>
 
-On the main page you can search for ads by region, city, category, by price and by text. Text search is implemented with elasticsearch.
+On the main page you can search bulletins by region, city, category, by price and by text. Text search is implemented with elasticsearch.
 
 Also you can log in or register.
 
@@ -118,7 +118,7 @@ If there is exists such email in the database, you will receive a letter with a 
 
 All attempts of registration are checked with Google ReCaptcha
 
-Email and phone fields are unic for all users. After registration you will recieve email with verification link.(implemented with the native laravel functionality)
+Email and phone fields are unique for all users. After registration you will recieve email with verification link. (Implemented with the native laravel functionality)
 
 <a name="list"/>
 
@@ -139,7 +139,7 @@ Here you can add new one, see, send to moderate, edit and delete it.
   <img src="https://sun9-38.userapi.com/impg/4JpGTEfD0j2yrVMD5v1qvLnR8N1Zwob9xcmwOQ/7XvAcKjozHg.jpg?size=2016x1482&quality=96&proxy=1&sign=1d02be750a07a02bf240bef7396bfb86&type=album" width="500" title="hover text">
 </p>
 
-Here you can edit your bulletin. You can uplod 10 photos. Alsoy you can select which of them will be main phoho (Will be demonstrate on main page).
+Here you can edit your bulletin. You can uplod up to 10 photos. Also you can select which of them will be main photo. (Will be demonstrate on main page).
 
 <a name="show"/>
 
@@ -153,4 +153,4 @@ Here you can edit your bulletin. You can uplod 10 photos. Alsoy you can select w
   <img src="https://sun9-41.userapi.com/impg/srIrlc-NDFDI8-SG0O-a5NLrKfz9sGXUmKaF-A/fIBFde9XZHs.jpg?size=1982x1520&quality=96&proxy=1&sign=ca997e7ba92fc10a10bcd7b5409aea00&type=album" width="500" title="hover text">
 </p>
 
-Here you can see your bulletin. All photos are. accesible via carousel plugin
+Here you can see your bulletin. All photos are accesible via carousel plugin.
