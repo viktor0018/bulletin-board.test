@@ -2,6 +2,17 @@
 
 This is a training project - a bulletin board where you can sell goods and services.
 
+#### Technologies used:
+
+-   PHP 7+
+-   Laravel
+-   PostgreSQL
+-   Docker, Docker-compose
+-   RabbitMQ [ queue for sending emails ]
+-   Recaptcha [ user check during login and registration ]
+-   Elastic Search [ search in title and description ]
+-   Redis
+
 <p align="center">
   <img src="https://sun9-23.userapi.com/impg/KBFdt_R-IuTzcTwkf4NaIqo5Iuxy26NEtwHYvw/VVZK1Z0nPZ4.jpg?size=1858x1474&quality=96&proxy=1&sign=1d2745c4c3a0ad5ff0207a67d43ae652&type=album" width="500" title="hover text">
 </p>
