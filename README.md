@@ -116,9 +116,7 @@ Also you can log in or register.
 
 All attempts of authorization are checked with Google ReCaptcha
 
-If you have forgotten your password, you can request a password reset.
-To do this, go to [password forgot page ](http://localhost:8083/?#/password_forgot "title ") and enter your email.
-If there is exists such email in the database, you will receive a letter with a token for resetting your password (implemented with the native laravel functionality)
+If you have forgotten your password, you can request a password reset. To do this, go to a [password forgot page ](http://localhost:8083/?#/password_forgot "title ") and enter your email. If there is such an email in the database, you will receive a letter with a token for resetting your password (implemented with the native laravel functionality)
 
 <a name="register"/>
 
@@ -130,7 +128,7 @@ If there is exists such email in the database, you will receive a letter with a 
 
 All attempts of registration are checked with Google ReCaptcha
 
-Email and phone fields are unique for all users. After registration you will recieve email with verification link. (Implemented with the native laravel functionality)
+Email and phone fields are unique for all users. After registration you will recieve an email with a verification link. (Implemented with the native laravel functionality)
 
 <a name="list"/>
 
@@ -140,8 +138,7 @@ Email and phone fields are unique for all users. After registration you will rec
   <img src="https://sun9-29.userapi.com/impg/HjbQLz6YjKeK47AR_RnsscVgU7VPWJ6697-hXw/CBp-u7PoPDs.jpg?size=2010x1382&quality=96&proxy=1&sign=c80dedf76cc38f89dcf7da41502860e6&type=album" width="500" title="hover text">
 </p>
 
-After login you get access fou your bulletin list.
-Here you can add new one, see, send to moderate, edit and delete it.
+After login you will get an access for your bulletin list. Here you can add a new one, watch it, send it for moderation, edit and delete it.
 
 <a name="edit"/>
 
@@ -151,7 +148,7 @@ Here you can add new one, see, send to moderate, edit and delete it.
   <img src="https://sun9-38.userapi.com/impg/4JpGTEfD0j2yrVMD5v1qvLnR8N1Zwob9xcmwOQ/7XvAcKjozHg.jpg?size=2016x1482&quality=96&proxy=1&sign=1d02be750a07a02bf240bef7396bfb86&type=album" width="500" title="hover text">
 </p>
 
-Here you can edit your bulletin. You can uplod up to 10 photos. Also you can select which of them will be main photo. (Will be demonstrate on main page).
+Here you can edit your bulletin. You can upload up to 10 photos. Also you can select which of them will be the main photo. (Will be demonstrated on the main page).
 
 <a name="show"/>
 
